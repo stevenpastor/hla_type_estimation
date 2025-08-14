@@ -1,9 +1,9 @@
 nextflow.enable.dsl=2
 
-// ---- require runs ----
+// require runs
 if( !params.runs ) error "config.yaml must define a 'runs' list (sample_id, type, fastq1, fastq2)."
 
-// ---- build simple lists (no optional syntax) ----
+// build simple lists
 def PE_RNA_LIST = []
 def SE_RNA_LIST = []
 def PE_ALL_LIST = []
@@ -27,7 +27,7 @@ params.runs.each { m ->
   }
 }
 
-// ---- channels ----
+// channels
 def PE_RNA_CH = Channel.from(PE_RNA_LIST)
 def SE_RNA_CH = Channel.from(SE_RNA_LIST)
 def PE_ALL_CH = Channel.from(PE_ALL_LIST)
@@ -36,7 +36,7 @@ def SE_ALL_CH = Channel.from(SE_ALL_LIST)
 // constant value channel for the PHLAT index (reused for every run)
 def PHLAT_INDEX_VAL = Channel.value( file(params.phlat_index) )
 
-// ======================= arcasHLA (RNA only) =======================
+// arcasHLA (RNA only)
 
 // PE RNA
 process ARCASHLA_PE {
@@ -88,7 +88,7 @@ process ARCASHLA_SE {
   """
 }
 
-// ======================= OptiType (RNA or DNA) =======================
+// OptiType (RNA or DNA)
 
 process OPTITYPE_PE {
   publishDir { "${params.outdir}/optitype/${sample}" }, mode: 'copy'
@@ -140,7 +140,7 @@ process OPTITYPE_SE {
   """
 }
 
-// ======================= PHLAT (RNA or DNA) =======================
+// PHLAT (RNA or DNA)
 
 process PHLAT_PE {
   publishDir { "${params.outdir}/phlat/${sample}" }, mode: 'copy'
@@ -209,7 +209,7 @@ process PHLAT_SE {
   """
 }
 
-// ======================= workflow =======================
+// workflow
 workflow {
   // arcasHLA only for RNA
   ARCASHLA_PE(PE_RNA_CH)
