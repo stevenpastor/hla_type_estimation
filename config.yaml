@@ -1,0 +1,34 @@
+outdir: "results"
+cpus: 8
+memory_gb: 32
+
+# arcasHLA
+arcashla_gene_list: "A,B,C,DMA,DMB,DOA,DOB,DPA1,DPB1,DQA1,DQB1,DRA,DRB1,DRB3,DRB5,E,F,G,H,J,K,L"
+
+# PHLAT index
+phlat_index: "/mnt/isilon/maris_lab/target_nbl_ngs/steven/projects/hla_type_estimation/TEST/index4phlat"
+
+# Samples to run (type: rna|dna; fastq2: "NA" means single-end)
+runs:
+  - sample_id: pe_dna_example
+    type: dna
+    fastq1: "/mnt/isilon/maris_lab/target_nbl_ngs/steven/projects/hla_type_estimation/TEST/example/pe_dna_example_R1.fastq.gz"
+    fastq2: "/mnt/isilon/maris_lab/target_nbl_ngs/steven/projects/hla_type_estimation/TEST/example/pe_dna_example_R2.fastq.gz"
+
+  - sample_id: pe_rna_example
+    type: rna
+    fastq1: "/mnt/isilon/maris_lab/target_nbl_ngs/steven/projects/hla_type_estimation/TEST/example/pe_rna_example_R1.fastq.gz"
+    fastq2: "/mnt/isilon/maris_lab/target_nbl_ngs/steven/projects/hla_type_estimation/TEST/example/pe_rna_example_R2.fastq.gz"
+
+  - sample_id: se_rna_example
+    type: rna
+    fastq1: "/mnt/isilon/maris_lab/target_nbl_ngs/steven/projects/hla_type_estimation/TEST/example/se_rna_example.fastq.gz"
+    fastq2: "NA"
+
+# SLURM (optional)
+slurm:
+  account: ""
+  partition: ""
+  qos: ""
+  time: "04:00:00"
+
